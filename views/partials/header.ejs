@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Fashion Nation</title>
+		
+		<!-- Google Font -->
+    	<link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+		
+		<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">  -->
+		 
+		<!-- <link rel="stylesheet" href="/stylesheets/main.css"> -->
+		<link rel="stylesheet" href="/stylesheets/bootstrap.min.css" type="text/css">
+    	<!-- <link rel="stylesheet" href="/stylesheets/font-awesome.min.css" type="text/css"> -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
+    	<link rel="stylesheet" href="/stylesheets/themify-icons.css" type="text/css">
+    	<link rel="stylesheet" href="/stylesheets/elegant-icons.css" type="text/css">
+    	<link rel="stylesheet" href="/stylesheets/owl.carousel.min.css" type="text/css">
+		<link rel="stylesheet" href="/stylesheets/nice-select.css" type="text/css">
+    	<link rel="stylesheet" href="/stylesheets/jquery-ui.min.css" type="text/css">
+    	<link rel="stylesheet" href="/stylesheets/slicknav.min.css" type="text/css">
+    	<link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
+		
+	</head>
+	<body>
+		<!-- Page Preloder -->
+    <!-- <div id="preloder">
+        <div class="loader"></div>
+    </div> -->
+		
+	    <!-- Header Section Begin -->
+    <header class="header-section">
+        <div class="header-top">
+            <div class="container">
+                <div class="ht-left">
+                    <div class="mail-service">
+                        <i class=" fas fa-envelope"></i>
+                        rickypatel8324@gmail.com
+                    </div>
+                    <div class="phone-service">
+                        <i class=" fa fa-phone-alt"></i>
+                        +91 9924954816
+                    </div>
+                </div>
+                <div class="ht-right">
+					<% if(!currentUser){ %>
+					<a href="/login" class="login-panel"><i class="fas fa-user"></i>Login</a>
+					<% }else{ %>
+					<a  href="/logout" class="login-panel"><i class="fas fa-user"></i>LogOut</a>
+					<% } %>
+					<div class="lan-selector">
+                        <img src="/img/flag-1.jpg">
+                            English
+                    </div>
+                    <div class="top-social">
+                        <a href="https://www.facebook.com/profile.php?id=100008924416119" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com/TechWithRicky1" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/in/ricky-patel-5892201a9/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/mr.__ricky/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="inner-header">
+                <div class="row">
+                    <div class="col-lg-2 col-md-2">
+                        <div class="logo">
+                            <a href="/products">
+                                <img src="img/logo.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-lg-5">
+                        <div class="advanced-search">
+                            <!-- <button type="button" class="category-btn">All Categories</button> -->
+                            <form action="/products/shop" method="GET" class="input-group">
+                                <input type="text" name="search" placeholder="What do you need?">
+                                <button type="submit" value="Search"><i class="fas fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 text-right col-lg-3">
+                        <ul class="nav-right">
+							<% if(!currentUser){ %>
+								<li class="heart-icon"><a href="/login">
+                                    <i class="far fa-heart"></i>
+                                    <!-- <span>1</span> -->
+                                </a></li>
+							<% }else{ %>
+								<li class="heart-icon"><a href="/products/<%= currentUser._id %>/bookmark">
+                                    <i class="far fa-heart"></i>
+                                    <!-- <span>1</span> -->
+                                </a></li>
+							<% } %>
+							<% if(!currentUser){ %>
+								<li class="heart-icon"><a href="/login">
+                                    <i class="fas fa-shopping-bag"></i>
+                                    <!-- <span>1</span> -->
+                                </a></li>
+							<% }else{ %>
+								<li class="cart-icon"><a href="/products/<%= currentUser._id %>/cart">
+    	                             <i class="fas fa-shopping-bag"></i>
+    	                             <!-- <span>3</span> -->
+								</a></li>
+    	                         <!-- <div class="cart-hover">
+    	                             <div class="select-items">
+    	                                 <table>
+    	                                     <tbody>
+    	                                         <tr>
+    	                                             <td class="si-pic"><img src="img/select-product-1.jpg" alt=""></td>
+    	                                             <td class="si-text">
+    	                                                 <div class="product-selected">
+    	                                                     <p>$60.00 x 1</p>
+    	                                                     <h6>Kabino Bedside Table</h6>
+    	                                                 </div>
+    	                                             </td>
+    	                                             <td class="si-close">
+    	                                                 <i class="ti-close"></i>
+    	                                             </td>
+    	                                         </tr>
+    	                                         <tr>
+    	                                             <td class="si-pic"><img src="img/select-product-2.jpg" alt=""></td>
+    	                                             <td class="si-text">
+    	                                                 <div class="product-selected">
+    	                                                     <p>$60.00 x 1</p>
+    	                                                     <h6>Kabino Bedside Table</h6>
+    	                                                 </div>
+    	                                             </td>
+    	                                             <td class="si-close">
+    	                                                 <i class="ti-close"></i>
+    	                                             </td>
+    	                                         </tr>
+    	                                     </tbody>
+    	                                 </table>
+    	                             </div>
+    	                             <div class="select-total">
+    	                                 <span>total:</span>
+    	                                 <h5>$120.00</h5>
+    	                             </div>
+    	                             <div class="select-button">
+    	                                 <a href="#" class="primary-btn view-card">VIEW CARD</a>
+    	                                 <a href="/products/checkout" class="primary-btn checkout-btn">CHECK OUT</a>
+    	                             </div>
+    	                         </div> -->
+    	                    <!-- <li class="cart-price">$150.00</li> -->
+							<% } %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="nav-item">
+            <div class="container">
+                <div class="nav-depart">
+                    <div class="depart-btn">
+                        <i class="fas fa-bars"></i>
+                        <span>All departments</span>
+                        <ul class="depart-hover">
+							<li class="active"><a href="/products/men">Men’s Clothing</a></li>
+                            <li ><a href="/products/women">Women’s Clothing</a></li>
+                            <li><a href="/products/kids">Kid's Clothing</a></li>
+							<!-- <li><a href="#">Underwear</a></li> -->
+                            <!-- <li><a href="#">Brand Fashion</a></li>
+                            <li><a href="#">Accessories/Shoes</a></li>
+                            <li><a href="#">Luxury Brands</a></li>
+                            <li><a href="#">Brand Outdoor Apparel</a></li> -->
+                        </ul>
+                    </div>
+                </div>
+                <nav class="nav-menu mobile-menu">
+                    <ul>
+                        <li><a href="/products">Home</a></li>
+                        <li><a href="/products/shop">Shop</a></li>
+                        <li><a href="/products/men">Collection</a>
+                            <ul class="dropdown">
+                                <li><a href="/products/men">Men's</a></li>
+                                <li><a href="/products/women">Women's</a></li>
+                                <li><a href="/products/kids">Kid's</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="javascript:void(0);">Blog</a></li>
+                        <li><a href="/products/contact">Contact</a></li>
+                        <li><a href="#">Pages</a>
+                            <ul class="dropdown">
+                                <li><a href="javascript:void(0);">Blog Details</a></li>
+								<% if(currentUser){ %>
+									<li><a href="/products/<%= currentUser._id %>/cart">Shopping Cart</a></li>
+									<!-- <li><a href="/products/<%= currentUser._id %>/checkout">Checkout</a></li> -->
+                                <% }else{ %>
+									<li><a href="/login">Shopping Cart</a></li>
+									<!-- <li><a href="/login">Checkout</a></li> -->
+								<% } %>
+								<li><a href="/faq">FAQs</a></li>
+                                <li><a href="/register">Register</a></li>
+                                <li><a href="/login">Login</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <div id="mobile-menu-wrap"></div>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+		
+		
+<!-- 	Aatmanirbhar Bharat Starts Here	
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/">AtmaNirbhar <i class="fas fa-rupee-sign"></i></a>
+  				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    			<span class="navbar-toggler-icon"></span>
+ 			</button>
+			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+        				<a class="nav-link" href="/products">Home <span class="sr-only">(current)</span></a>
+      				</li>
+				</ul>
+				<ul class="navbar-nav ml-auto">
+					<% if(!currentUser){ %>
+						<li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+						<li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+					<% }else{ %>
+						<li class="nav-item"><a class="nav-link" href="/products/<%= currentUser._id %>/bookmark">My Bookmarks</a></li>	
+						<li class="nav-item"><a class="nav-link" href="">Signed In As <%= currentUser.username %></a></li>
+						<li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+					<% } %>
+				</ul>
+			</div>
+		</div>
+	</nav> -->
+	<div class="container">
+		<% if(error && error.length>0){ %>
+				<div class="alert alert-danger" role="alert">
+					<%= error %>
+				</div>
+		<% } %>
+		<% if(success && success.length>0){ %>
+				<div class="alert alert-success" role="alert">
+					<%= success %>
+				</div>
+		<% } %>
+	</div>
+	
+	
+		 

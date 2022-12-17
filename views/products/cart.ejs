@@ -1,0 +1,152 @@
+<%- include("../partials/header") %>
+
+<!-- Breadcrumb Section Begin -->
+<div class="breacrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <a href="#"><i class="fa fa-home"></i> Home</a>
+                    <span>Shop&nbsp;|&nbsp;</span><span>&nbsp;Shopping Cart</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section Begin -->
+
+<!-- Shopping Cart Section Begin -->
+    <section class="shopping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="cart-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th class="p-name">Product Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th><i class="fas fa-times"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+								<% if(cartProducts !=null){ %>
+									<% cartProducts.forEach(function(product){ %>
+                                		<tr>
+                                		    <td class="cart-pic first-row"><img src="<%= product.imgBig %>" alt="Product Image"></td>
+                                		    <td class="cart-title first-row">
+                                		        <h5><%= product.name %></h5>
+                                		    </td>
+                                		    <td class="p-price first-row">$<span class="product-price"><%= product.discPrice %></span></td>
+                                		    <td class="qua-col first-row">
+                                		        <div class="">
+                                		            <div class="pro-qty">
+														<input type="number" oninput="ChangeQuantityInCart('<%= product._id %>');" class="product-quantity" min="1" name="quantity" value="<%= product.quantity %>" />
+													</div>
+                                		        </div>
+                                		    </td>
+                                		    <td class="total-price first-row">$<span class="product-total"><%= product.productTotal %></span></td>
+											<td class="close-td first-row crossbtn" onclick="removeFromCart('<%= product._id %>',this);"><i class="fas fa-times"></i></td>
+                                		</tr>
+									<% }) %>
+								<% } else{ %>
+								<h5>&nbsp; &nbsp;Shopping Cart Empty</h5>
+								<% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="cart-buttons">
+                                <a href="javascript:history.back()" class="primary-btn continue-shop">Continue shopping</a>
+                                <a href="" class="primary-btn up-cart">Update cart</a>
+                            </div>
+                            <!-- <div class="discount-coupon">
+                                <h6>Discount Codes</h6>
+                                <form action="#" class="coupon-form">
+                                    <input type="text" placeholder="Enter your codes">
+                                    <button type="submit" class="site-btn coupon-btn">Apply</button>
+                                </form>
+                            </div> -->
+                        </div>
+						<div class="col-lg-4 offset-lg-4">
+                        	Please click on update cart before proceeding for checkout to avoid any issues
+							<div class="proceed-checkout">
+								<form action="/products/<%= currentUser._id %>/checkout" method="POST" >
+									<ul>
+										<li class="subtotal"><span class="subtotal">Subtotal $</span><input class="subtotal" id="subTotal" name="subTotal" readonly="true"></li>
+                                    	<li class="cart-total"><span class="cart-total">Total $</span><input class="cart-total" id="cartTotal" name ="cartTotal" readonly="true"></li>
+                                	</ul>
+                                	<button type="submit"  class="proceed-btn">PROCEED TO CHECK OUT</button>
+								</form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shopping Cart Section End -->
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+	
+	//to remove an element from cart
+	var removeFromCart = function (productId, elem){
+		
+		elem.parentNode.style.display = "none";
+		axios.post('/products/' + productId + '/cart/RemoveFromCart');
+		
+	};
+	
+	//to load the inital cart-total and sub-total amount
+	document.addEventListener("DOMContentLoaded", function() {
+ 		console.log("dom content function");
+		var total=0.00;
+		var totals = document.querySelectorAll('.product-total');
+		totals.forEach(function(elems){
+			total = total + parseFloat(elems.textContent);
+		});
+		document.querySelector('#cartTotal').value = total;
+		document.querySelector('#subTotal').value = total;
+	});
+	
+	//to change the quantity of products
+	function ChangeQuantityInCart(productId){
+		var quantityElem = document.querySelectorAll('.product-quantity');
+		quantityElem.forEach(function(elem){
+			elem.addEventListener("change",function(){
+	 			var quantity = elem.value;
+				var productPrice = elem.parentNode.parentNode.parentNode.parentNode.querySelector('.product-price').textContent;
+		 		var productTotal = productPrice * quantity;
+		 		elem.parentNode.parentNode.parentNode.parentNode.querySelector('.product-total').textContent = productTotal;
+		 		var total=0.00;
+		 		var totals = document.querySelectorAll('.product-total');
+		 		totals.forEach(function(elems){
+		 			total = total + parseFloat(elems.textContent);
+		 		});
+		 		document.querySelector('#cartTotal').value = total;
+				document.querySelector('#subTotal').value = total;
+				axios.post('/products/' + productId + '/cart/changeQuantity/' + quantity);
+			});
+		});
+	}
+	
+	//checkout funnction
+	// function checkoutfunc(){
+	// 	var subTotal = document.querySelector('#subTotal').textContent;
+	// 	var cartTotal = document.querySelector('#cartTotal').textContent;
+	// 	console.log("check out fucntion called");
+	// 	console.log(subTotal);
+	// 	console.log(cartTotal);
+	// 	axios.get('/products/checkout/' + subTotal + '/' + cartTotal);
+	// }
+		
+	
+</script>
+
+
+<%- include("../partials/footer") %>

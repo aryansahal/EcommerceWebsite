@@ -1,0 +1,424 @@
+<%- include("../partials/header") %>
+
+<!-- Hero Section Begin -->
+    <section class="hero-section">
+        <div class="hero-items owl-carousel">
+            <div class="single-hero-items set-bg" data-setbg="img/hero-1.jpg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <span>Women Fashion</span>
+                            <h1>Best Of Women's Wear</h1>
+                            <p>MIN 20%OFF + EXTRA 10% OFF USE CODE: CORONA19</p>
+                            <a href="/products/shop" class="primary-btn">Shop Now</a>
+                        </div>
+                    </div>
+                    <div class="off-card">
+                        <h2>Sale <span>20%</span></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="single-hero-items set-bg" data-setbg="img/hero-2.jpg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <span>Men's Casual Wear</span>
+                            <h1>Last Day Of Sale</h1>
+                            <p>+ EXPLORE NEVER-BEFORE-PRICES</p>
+                            <a href="/products/shop" class="primary-btn">Shop Now</a>
+                        </div>
+                    </div>
+                    <div class="off-card">
+                        <h2>Sale <span>40%</span></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+<!-- Banner Section Begin -->
+    <div class="banner-section spad">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="single-banner">
+                        <img src="img/banner-1.jpg" alt="">
+                        <div class="inner-text">
+                            <h4>Men’s</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="single-banner">
+                        <img src="img/banner-2.jpg" alt="">
+                        <div class="inner-text">
+                            <h4>Women’s</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="single-banner">
+                        <img src="img/banner-3.jpg" alt="">
+                        <div class="inner-text">
+                            <h4>Kid’s</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner Section End -->
+
+<!-- Women Banner Section Begin -->
+    <section class="women-banner spad">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="product-large set-bg" data-setbg="img/products/women-large.jpg">
+                        <h2>Women’s</h2>
+                        <a href="/products/women">Discover More</a>
+                    </div>
+                </div>
+                <div class="col-lg-8 offset-lg-1">
+                    <div class="filter-control">
+                        <ul>
+							<li></li>
+							<li></li>
+							<li></li>
+                            <!-- <li class="active">Clothings</li>
+                            <li>HandBag</li>
+                            <li>Shoes</li>
+                            <li>Accessories</li> -->
+                        </ul>
+                    </div>
+                    <div class="product-slider owl-carousel">
+						<% womenProducts.forEach(function(product){ %>
+                        	<div class="product-item">
+                        	    <div class="pi-pic">
+                        	        <img src="<%= product.imgs1 %>" alt="Product Image">
+                        	        <!-- <div class="sale">Sale</div> -->
+                        	        <div class="icon">
+                        	            <% if(currentUser){ %>
+											<% for(var i =0; i<currentUser.bookmarkCollection.length; i++){ %>
+												<% if(String(currentUser.bookmarkCollection[i]) === String(product._id)){ %>
+													<% currentUser.bookmarkStatus = true; %>
+													<% break; %>
+												<% }else{ %>
+													<% currentUser.bookmarkStatus = false; %>
+												<% } %>
+											<% } %>
+											
+											<% if(currentUser.bookmarkStatus){ %>
+												<button onclick="bookmarkOnPost(event);" class=" far fas fa-heart"  style="border:none; background:none;"
+												data-post-id="<%= product._id %>"></button>
+											<% }else{ %>
+												<button onclick="bookmarkOnPost(event);" class="far fa-heart"  style="border:none; background:none;"
+												data-post-id="<%= product._id %>"></button>
+											<% } %>            			
+										<% } %>
+                        	        </div>
+                        	        <ul>
+                        	            <li class="w-icon active shopping"><a href="javascript:void(0)" onclick="addToCart('<%= product._id %>', this);" ><i class="fas fa-cart-plus"></i></a></li>
+										<li class="quick-view"><a href="/products/<%= product._id %>">+ Quick View</a></li>
+                        	            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
+                        	        </ul>
+                        	    </div>
+                        	    <div class="pi-text">
+                        	        <!-- <div class="catagory-name">Coat</div> -->
+                        	        <a href="#">
+                        	            <h5><%= product.name %></h5>
+                        	        </a>
+                        	        <div class="product-price">
+                        	            $<%= product.discPrice %>
+                        	            <span>$<%= product.actualPrice %></span>
+                        	        </div>
+                        	    </div>
+                        	</div>
+						<% }) %>
+                        <!-- <div class="product-item">
+                            <div class="pi-pic">
+                                <img src="img/products/women-2.jpg" alt="">
+                                <div class="icon">
+                                    <i class="icon_heart_alt"></i>
+                                </div>
+                                <ul>
+                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">Shoes</div>
+                                <a href="#">
+                                    <h5>Guangzhou sweater</h5>
+                                </a>
+                                <div class="product-price">
+                                    $13.00
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item">
+                            <div class="pi-pic">
+                                <img src="img/products/women-3.jpg" alt="">
+                                <div class="icon">
+                                    <i class="icon_heart_alt"></i>
+                                </div>
+                                <ul>
+                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">Towel</div>
+                                <a href="#">
+                                    <h5>Pure Pineapple</h5>
+                                </a>
+                                <div class="product-price">
+                                    $34.00
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item">
+                            <div class="pi-pic">
+                                <img src="img/products/women-4.jpg" alt="">
+                                <div class="icon">
+                                    <i class="icon_heart_alt"></i>
+                                </div>
+                                <ul>
+                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">Towel</div>
+                                <a href="#">
+                                    <h5>Converse Shoes</h5>
+                                </a>
+                                <div class="product-price">
+                                    $34.00
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Women Banner Section End -->
+
+<!-- Deal Of The Week Section Begin-->
+    <section class="deal-of-week set-bg spad" data-setbg="img/time-bg.jpg">
+        <div class="container">
+            <div class="col-lg-6 text-center">
+                <div class="section-title">
+                    <h2>Deal Of The Week</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed<br /> do ipsum dolor sit amet,
+                        consectetur adipisicing elit </p>
+                    <div class="product-price">
+                        $35.00
+                        <span>/ HanBag</span>
+                    </div>
+                </div>
+                <div class="countdown-timer" id="countdown">
+                    <div class="cd-item">
+                        <span>56</span>
+                        <p>Days</p>
+                    </div>
+                    <div class="cd-item">
+                        <span>12</span>
+                        <p>Hrs</p>
+                    </div>
+                    <div class="cd-item">
+                        <span>40</span>
+                        <p>Mins</p>
+                    </div>
+                    <div class="cd-item">
+                        <span>52</span>
+                        <p>Secs</p>
+                    </div>
+                </div>
+                <a href="#" class="primary-btn">Shop Now</a>
+            </div>
+        </div>
+    </section>
+    <!-- Deal Of The Week Section End -->
+
+<!-- Man Banner Section Begin -->
+    <section class="man-banner spad">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="filter-control">
+                        <ul>
+							<li></li>
+							<li></li>
+							<li></li>
+                            <!-- <li class="active">Clothings</li>
+                            <li>HandBag</li>
+                            <li>Shoes</li>
+                            <li>Accessories</li> -->
+                        </ul>
+                    </div>
+                    <div class="product-slider owl-carousel">
+						<% menProducts.forEach(function(product){ %>
+                        	<div class="product-item">
+								<div class="pi-pic">
+                        	        <img src="<%= product.imgs1 %>" alt="Product Image">
+                        	        <div class="sale">Sale</div>
+									<div class="icon">
+									<% if(currentUser){ %>
+										<% for(var i =0; i<currentUser.bookmarkCollection.length; i++){ %>
+											<% if(String(currentUser.bookmarkCollection[i]) === String(product._id)){ %>
+												<% currentUser.bookmarkStatus = true; %>
+												<% break; %>
+											<% }else{ %>
+												<% currentUser.bookmarkStatus = false; %>
+											<% } %>
+										<% } %>
+										
+										<% if(currentUser.bookmarkStatus){ %>
+											<button onclick="bookmarkOnPost(event);" class=" far fas fa-heart"  style="border:none; background:none;"
+											data-post-id="<%= product._id %>"></button>
+										<% }else{ %>
+											<button onclick="bookmarkOnPost(event);" class="far fa-heart"  style="border:none; background:none;"
+											data-post-id="<%= product._id %>"></button>
+										<% } %>            			
+									<% } %>
+									</div>
+                        	        <ul>
+                        	            <% if(currentUser){ %>
+                                            <li class="w-icon active shopping"><a href="javascript:void(0)" onclick="addToCart('<%= product._id %>', this);" ><i class="fas fa-cart-plus"></i></a></li>
+                        	        	<% } else{ %>
+											<li class="w-icon active"><a href="/login"><i class="fas fa-cart-plus"></i></a></li>
+										<% } %>
+										<li class="quick-view"><a href="/products/<%= product._id %>">+ Quick View</a></li>
+                        	            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
+                        	        </ul>
+                        	    </div>
+                        	    <div class="pi-text">
+                        	        <!-- <div class="catagory-name">Coat</div> -->
+                        	        <a href="#">
+                        	            <h5><%= product.name %></h5>
+                        	        </a>
+                        	        <div class="product-price">
+                        	            $<%= product.discPrice %>
+                        	            <span>$<%= product.actualPrice %></span>
+                        	        </div>
+                        	    </div>
+                        	</div>
+						<% }) %>
+                        <!-- <div class="product-item">
+                            <div class="pi-pic">
+                                <img src="img/products/man-2.jpg" alt="">
+                                <div class="icon">
+                                    <i class="icon_heart_alt"></i>
+                                </div>
+                                <ul>
+                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">Shoes</div>
+                                <a href="#">
+                                    <h5>Guangzhou sweater</h5>
+                                </a>
+                                <div class="product-price">
+                                    $13.00
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item">
+                            <div class="pi-pic">
+                                <img src="img/products/man-3.jpg" alt="">
+                                <div class="icon">
+                                    <i class="icon_heart_alt"></i>
+                                </div>
+                                <ul>
+                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">Towel</div>
+                                <a href="#">
+                                    <h5>Pure Pineapple</h5>
+                                </a>
+                                <div class="product-price">
+                                    $34.00
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item">
+                            <div class="pi-pic">
+                                <img src="img/products/man-4.jpg" alt="">
+                                <div class="icon">
+                                    <i class="icon_heart_alt"></i>
+                                </div>
+                                <ul>
+                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">Towel</div>
+                                <a href="#">
+                                    <h5>Converse Shoes</h5>
+                                </a>
+                                <div class="product-price">
+                                    $34.00
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="col-lg-3 offset-lg-1">
+                    <div class="product-large set-bg m-large" data-setbg="img/products/man-large.jpg">
+                        <h2>Men’s</h2>
+                        <a href="/products/men">Discover More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Man Banner Section End -->
+
+
+
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+		var bookmarkOnPost = function (event) {
+			var postId = event.target.dataset.postId;
+            event.target.classList.toggle("fas");
+			console.log(event.target.classList.contains("fas"));
+			if(event.target.classList.contains("fas")){
+				func("Bookmarked");
+			}else{
+				func("Bookmark");
+			}
+			function func(action){
+				console.log("value of action is:" + action);
+				console.log(typeof(action));
+				axios.post('/products/' + postId + '/bookmark/'+action);	
+			}
+        };
+		var addToCart = function (postId, elem){
+			var icons = document.querySelectorAll('.shopping');
+			icons.forEach(function(elem){
+			elem.addEventListener("click",function(){
+	 			elem.childNodes[0].childNodes[0].classList.remove("fa-cart-plus");
+				elem.childNodes[0].childNodes[0].classList.add("fa-shopping-bag");
+			});
+		});
+			axios.post('/products/' + postId + '/cart/AddToCart');
+		};
+    </script>
+
+<%- include("../partials/footer") %>

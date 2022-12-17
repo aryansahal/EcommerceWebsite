@@ -1,0 +1,60 @@
+<%- include("../partials/header") %>
+<div class="container mt-5">
+	
+		<h1 class="text-center">Edit <%= product.name %>	</h1>
+		<div style="width: 30%; margin: 25px auto;">
+			<form action="/products/<%= product._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+				<div class="form-group">
+					<input type="text" class="form-control" name="name" value="<%= product.name %>">
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" name="category" value="<%= product.category %>">
+				</div>
+				<div class="form-group">
+					<input type="number" class="form-control" name="actualPrice" value="<%= product.actualPrice %>">
+				</div>
+				<div class="form-group">
+					<input type="number" class="form-control" name="discPrice" value="<%= product.discPrice %>">
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" name="imgBig" value="<%= product.imgBig %>">
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" name="imgs1" value="<%= product.imgs1 %>">
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" name="imgs2" value="<%= product.imgs2 %>">
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" name="imgs3" value="<%= product.imgs3 %>">
+				</div>
+				<div class="form-group">
+					<textarea class="form-control" rows="5" name="description"><%= product.description %></textarea>
+				</div>
+				
+				<!-- <label>Foreign Product</label>
+				<div class="form-group">
+					<input type="text" class="form-control" name="imageC" value="<%= product.imageC %>">
+				</div>
+				<label style="margin-left: 40%;">OR</label>
+				<div class="form-group">
+					<input type="file" class="form-control" name="productChina">
+				</div> 
+				<label>Indian Product</label>
+				<div class="form-group">
+					<input type="text" class="form-control" name="imageNc" value="<%= product.imageNc %>">
+				</div>
+				<label style="margin-left: 40%;">OR</label>
+				<div class="form-group">
+					<input type="file" class="form-control" name="productIndia">
+				</div> -->
+				<div class="form-group">
+					<button class="btn btn-lg btn-primary btn-block">Submit!</button>
+				</div>
+			
+			</form>	
+			<a href="/products">Go Back</a>	
+		</div>
+</div>
+
+<%- include ("../partials/footer") %>
